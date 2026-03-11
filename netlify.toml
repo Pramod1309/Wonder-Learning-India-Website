@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+# Optional: set the Node version if needed
+#[build.environment]
+#  NODE_VERSION = "20"

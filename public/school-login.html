@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>School Login | Wonder Learning India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      html, body { height: 100%; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif; }
+      .bg-overlay { background: radial-gradient(1200px 800px at 50% -10%, rgba(255,255,255,.25), rgba(255,255,255,0)); }
+    </style>
+  </head>
+  <body class="min-h-screen m-0 bg-cover bg-center bg-no-repeat relative" style="background-image: url('/src/assets/BG%20image.avif');">
+    <div class="absolute inset-0 bg-sky-900/30"></div>
+    <div class="absolute inset-0 bg-overlay"></div>
+
+    <main class="relative min-h-screen flex items-center justify-center p-6">
+      <!-- Card -->
+      <section class="w-full max-w-md rounded-2xl border border-white/30 bg-white/10 backdrop-blur-xl shadow-2xl p-8 text-white">
+        <!-- Icon -->
+        <div class="mx-auto w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-6">
+          <!-- Graduation cap icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9 text-white">
+            <path d="M12 3L1 9l11 6 9-4.909V17h2V9L12 3z"/>
+            <path d="M11 21.5V16.7l-7-3.818V14c0 2.485 3.134 4.5 7 4.5z" opacity=".5"/>
+          </svg>
+        </div>
+        <h1 class="text-center text-2xl font-bold tracking-tight">School Portal</h1>
+        <p class="text-center text-white/80 text-sm mt-1">Secure access for schools and staff</p>
+
+        <!-- Tabs -->
+        <div class="mt-6 grid grid-cols-2 gap-2 bg-white/10 p-1 rounded-xl">
+          <button id="tab-school" class="tab-btn rounded-lg py-2.5 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-white/40">School Login</button>
+          <button id="tab-staff" class="tab-btn rounded-lg py-2.5 text-sm font-medium transition focus:outline-none focus:ring-2 focus:ring-white/40">School Staff Login</button>
+        </div>
+
+        <!-- Forms -->
+        <form id="form-school" class="space-y-4 mt-6">
+          <div>
+            <label class="block text-sm mb-1" for="school-email">Email</label>
+            <input id="school-email" type="email" required placeholder="you@school.edu" class="w-full rounded-lg bg-white/15 border border-white/30 px-3 py-2.5 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/40" />
+          </div>
+          <div>
+            <label class="block text-sm mb-1" for="school-password">Password</label>
+            <input id="school-password" type="password" required placeholder="••••••••" class="w-full rounded-lg bg-white/15 border border-white/30 px-3 py-2.5 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/40" />
+          </div>
+          <button type="submit" class="w-full bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold rounded-lg py-2.5 transition shadow-lg shadow-sky-900/20">Login</button>
+        </form>
+
+        <form id="form-staff" class="space-y-4 mt-6 hidden">
+          <div>
+            <label class="block text-sm mb-1" for="staff-email">Email</label>
+            <input id="staff-email" type="email" required placeholder="you@school.edu" class="w-full rounded-lg bg-white/15 border border-white/30 px-3 py-2.5 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/40" />
+          </div>
+          <div>
+            <label class="block text-sm mb-1" for="staff-password">Password</label>
+            <input id="staff-password" type="password" required placeholder="••••••••" class="w-full rounded-lg bg-white/15 border border-white/30 px-3 py-2.5 placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/40" />
+          </div>
+          <button type="submit" class="w-full bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white font-semibold rounded-lg py-2.5 transition shadow-lg shadow-sky-900/20">Login</button>
+        </form>
+
+        <p class="text-center text-xs text-white/70 mt-6">Note: Authentication will be integrated with your ERP later.</p>
+      </section>
+    </main>
+
+    <script>
+      const tabs = { school: document.getElementById('tab-school'), staff: document.getElementById('tab-staff') };
+      const forms = { school: document.getElementById('form-school'), staff: document.getElementById('form-staff') };
+
+      function setActive(which) {
+        for (const key of Object.keys(tabs)) {
+          const active = key === which;
+          tabs[key].classList.toggle('bg-white/30', active);
+          tabs[key].classList.toggle('text-sky-900', active);
+          tabs[key].classList.toggle('text-white', !active);
+          forms[key].classList.toggle('hidden', !active);
+        }
+      }
+
+      tabs.school.addEventListener('click', () => setActive('school'));
+      tabs.staff.addEventListener('click', () => setActive('staff'));
+      setActive('school');
+
+      forms.school.addEventListener('submit', (e) => { e.preventDefault(); alert('School login coming soon.'); });
+      forms.staff.addEventListener('submit', (e) => { e.preventDefault(); alert('Staff login coming soon.'); });
+    </script>
+  </body>
+</html>

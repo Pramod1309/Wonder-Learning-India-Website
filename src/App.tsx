@@ -1,0 +1,101 @@
+import { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Curriculum from './components/Curriculum';
+import Services from './components/Services';
+import Portfolio from './components/Portfolio';
+import Gallery from './components/Gallery';
+import Blog from './components/Blog';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import Careers from './components/Careers';
+import FAQ from './components/FAQ';
+import ChatAssistant from './components/ChatAssistant';
+
+export default function App() {
+  const [headerHeight, setHeaderHeight] = useState(0);
+  useEffect(() => {
+    // Smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+  }, []);
+
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      const el = document.getElementById('site-header');
+      setHeaderHeight(el ? el.getBoundingClientRect().height : 0);
+    };
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight);
+    return () => window.removeEventListener('resize', updateHeaderHeight);
+  }, []);
+
+  return (
+    <div className="relative min-h-screen bg-white overflow-hidden">
+      {/* Global Floating Elements - Clouds */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        {/* Floating clouds */}
+        {[...Array(3)].map((_, i) => (
+          <motion.div
+            key={`global-cloud-${i}`}
+            className="absolute text-5xl opacity-5 pointer-events-none"
+            initial={{ x: -100, y: 100 + i * 200 }}
+            animate={{ x: window.innerWidth + 100 }}
+            transition={{
+              duration: 30 + i * 10,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+          >
+            ☁️
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10">
+        <Navbar />
+        {/* Spacer to offset fixed double header height (dynamic) */}
+        <div style={{ height: headerHeight }}></div>
+        <Hero />
+        <About />
+        <Services />
+        <Curriculum />
+        <Portfolio />
+        <Gallery />
+        <Careers />
+        <Blog />
+        <Contact />
+        <FAQ />
+        <Footer />
+      </div>
+
+      {/* Scroll to Top Button */}
+      <motion.button
+        className="fixed bottom-6 right-6 z-[1001] w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.1, y: -5 }}
+        whileTap={{ scale: 0.9 }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          width: '48px',
+          height: '48px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1001
+        }}
+      >
+        ⬆️
+      </motion.button>
+      
+      {/* Chat Assistant */}
+      <ChatAssistant />
+    </div>
+  );
+}
