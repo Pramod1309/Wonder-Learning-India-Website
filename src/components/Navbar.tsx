@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, Mail, Phone, Facebook, Linkedin, Instagram, GraduationCap } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import logo from '../assets/logo.png';
@@ -7,7 +8,7 @@ import skyHeaderBg from '../assets/Sky2.avif';
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeHref, setActiveHref] = useState('#home');
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,50 +18,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const sectionIds = [
-      '#home',
-      '#about',
-      '#services',
-      '#products',
-      '#curriculum',
-      '#portfolio',
-      '#gallery',
-      '#careers',
-      '#blog',
-      '#contact',
-    ];
-
-    const observers: IntersectionObserver[] = [];
-    sectionIds.forEach((id) => {
-      const el = document.querySelector(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setActiveHref(id);
-            }
-          });
-        },
-        { root: null, threshold: 0.3 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Curriculum', href: '#curriculum' },
-    { name: 'Our Clients', href: '#portfolio' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'Careers', href: '#careers' },
-    { name: 'Blog', href: '#blog' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', to: '/' },
+    { name: 'About', to: '/about' },
+    { name: 'Services', to: '/services' },
+    { name: 'Curriculum', to: '/curriculum' },
+    { name: 'Our Clients', to: '/portfolio' },
+    { name: 'Gallery', to: '/gallery' },
+    { name: 'Careers', to: '/careers' },
+    { name: 'Blog', to: '/blog' },
+    { name: 'Contact', to: '/contact' },
   ];
 
   return (
@@ -74,14 +41,15 @@ export default function Navbar() {
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between gap-4">
             {/* Left: Logo + Company */}
-            <motion.a
-              href="#home"
+            <motion.div
               className="flex items-center gap-3"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <img src={logo} alt="Wonder Learning India" className="h-24 w-auto object-contain" />
-            </motion.a>
+              <Link to="/" className="inline-flex">
+                <img src={logo} alt="Wonder Learning India" className="h-24 w-auto object-contain" />
+              </Link>
+            </motion.div>
 
             {/* Right: Contact + Social */}
             <div className="hidden md:flex items-center gap-6 text-sky-950">
@@ -120,31 +88,38 @@ export default function Navbar() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-3">
               {navLinks.map((link, index) => (
-                <motion.a
+                <motion.div
                   key={link.name}
-                  href={link.href}
-                  className="relative text-black hover:text-black transition-colors font-extrabold text-xl rounded-lg px-4 py-1.5 bg-white shadow border border-black/10 ring-1 ring-black/5 backdrop-blur-sm"
-                  style={{ fontFamily: '"Comic Neue", cursive' }}
                   initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0, scale: activeHref === link.href ? 1.05 : 1 }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    scale: location.pathname === link.to ? 1.05 : 1,
+                  }}
                   transition={{ delay: index * 0.05 }}
                   whileHover={{ y: -2 }}
-                  onClick={() => setActiveHref(link.href)}
                 >
-                  {link.name}
-                  <span
-                    className="absolute rounded-full pointer-events-none"
-                    style={{
-                      left: '50%',
-                      transform: 'translateX(-50%)',
-                      bottom: '-8px',
-                      height: '3px',
-                      backgroundColor: 'rgba(249, 184, 5, 0.96)',
-                      width: activeHref === link.href ? '60%' : '0%',
-                      transition: 'width 200ms ease',
-                    }}
-                  />
-                </motion.a>
+                  <NavLink
+                    to={link.to}
+                    end={link.to === '/'}
+                    className="relative text-black hover:text-black transition-colors font-extrabold text-xl rounded-lg px-4 py-1.5 bg-white shadow border border-black/10 ring-1 ring-black/5 backdrop-blur-sm block"
+                    style={{ fontFamily: '"Comic Neue", cursive' }}
+                  >
+                    {link.name}
+                    <span
+                      className="absolute rounded-full pointer-events-none"
+                      style={{
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        bottom: '-8px',
+                        height: '3px',
+                        backgroundColor: 'rgba(249, 184, 5, 0.96)',
+                        width: location.pathname === link.to ? '60%' : '0%',
+                        transition: 'width 200ms ease',
+                      }}
+                    />
+                  </NavLink>
+                </motion.div>
               ))}
             </div>
 
@@ -194,18 +169,22 @@ export default function Navbar() {
                     <span>School Login</span>
                   </a>
                   {navLinks.map((link, index) => (
-                    <motion.a
+                    <motion.div
                       key={link.name}
-                      href={link.href}
-                      className="p-3 rounded-lg bg-white text-black hover:bg-white font-extrabold text-lg border border-black/10 shadow ring-1 ring-black/5 backdrop-blur-sm"
-                      style={{ fontFamily: '"Comic Neue", cursive' }}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.03 }}
-                      onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      {link.name}
-                    </motion.a>
+                      <NavLink
+                        to={link.to}
+                        end={link.to === '/'}
+                        className="p-3 rounded-lg bg-white text-black hover:bg-white font-extrabold text-lg border border-black/10 shadow ring-1 ring-black/5 backdrop-blur-sm block"
+                        style={{ fontFamily: '"Comic Neue", cursive' }}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {link.name}
+                      </NavLink>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>

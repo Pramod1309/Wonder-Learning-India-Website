@@ -1,25 +1,22 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import { motion } from 'motion/react';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Curriculum from './components/Curriculum';
-import Services from './components/Services';
-import Portfolio from './components/Portfolio';
-import Gallery from './components/Gallery';
-import Blog from './components/Blog';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Careers from './components/Careers';
-import FAQ from './components/FAQ';
 import ChatAssistant from './components/ChatAssistant';
+import ScrollToTop from './components/ScrollToTop';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
+import ServicesPage from './pages/ServicesPage';
+import CurriculumPage from './pages/CurriculumPage';
+import PortfolioPage from './pages/PortfolioPage';
+import GalleryPage from './pages/GalleryPage';
+import CareersPage from './pages/CareersPage';
+import BlogPage from './pages/BlogPage';
+import ContactPage from './pages/ContactPage';
 
-export default function App() {
+function Layout() {
   const [headerHeight, setHeaderHeight] = useState(0);
-  useEffect(() => {
-    // Smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-  }, []);
 
   useEffect(() => {
     const updateHeaderHeight = () => {
@@ -32,7 +29,24 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-white overflow-hidden">
+    <div className="relative z-10">
+      <Navbar />
+      <div style={{ height: headerHeight }}></div>
+      <Outlet />
+      <Footer />
+    </div>
+  );
+}
+
+export default function App() {
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+  }, []);
+
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <div className="relative min-h-screen bg-white overflow-hidden">
       {/* Global Floating Elements - Clouds */}
       <div className="fixed inset-0 z-0 overflow-hidden">
         {/* Floating clouds */}
@@ -54,22 +68,19 @@ export default function App() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10">
-        <Navbar />
-        {/* Spacer to offset fixed double header height (dynamic) */}
-        <div style={{ height: headerHeight }}></div>
-        <Hero />
-        <About />
-        <Services />
-        <Curriculum />
-        <Portfolio />
-        <Gallery />
-        <Careers />
-        <Blog />
-        <Contact />
-        <FAQ />
-        <Footer />
-      </div>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="services" element={<ServicesPage />} />
+          <Route path="curriculum" element={<CurriculumPage />} />
+          <Route path="portfolio" element={<PortfolioPage />} />
+          <Route path="gallery" element={<GalleryPage />} />
+          <Route path="careers" element={<CareersPage />} />
+          <Route path="blog" element={<BlogPage />} />
+          <Route path="contact" element={<ContactPage />} />
+        </Route>
+      </Routes>
 
       {/* Scroll to Top Button */}
       <motion.button
@@ -97,5 +108,6 @@ export default function App() {
       {/* Chat Assistant */}
       <ChatAssistant />
     </div>
+    </BrowserRouter>
   );
 }

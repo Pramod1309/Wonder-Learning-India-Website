@@ -19,7 +19,7 @@ export default function HeroImage() {
       <img
         src={images[currentIndex]}
         alt="Hero slideshow"
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover object-center"
       />
     </div>
   );
