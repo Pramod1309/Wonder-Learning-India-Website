@@ -64,7 +64,9 @@ export default function Careers() {
               <p className="text-sm text-gray-500 mb-3">{job.location} • {job.type}</p>
               <p className="text-gray-700 mb-4">{job.summary}</p>
               <motion.a
-                href="#contact"
+                href="https://wa.me/918956022183?text=Hi! I'm interested in applying for the {job.title} position."
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}

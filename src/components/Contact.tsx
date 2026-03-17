@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Contact() {
@@ -260,17 +260,61 @@ export default function Contact() {
             >
               <h4 className="text-white text-xl mb-4">Follow Us! 🌟</h4>
               <div className="flex justify-center gap-4">
-                {['📘', '📸', '🐦', '📺', '💼'].map((emoji, i) => (
-                  <motion.button
-                    key={i}
-                    className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl shadow-lg"
-                    whileHover={{ scale: 1.2, rotate: 360 }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {emoji}
-                  </motion.button>
-                ))}
+                <motion.a
+                  href="https://www.facebook.com/wonderlearningindia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl shadow-lg"
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  📘
+                </motion.a>
+                <motion.a
+                  href="https://www.instagram.com/wonderlearningindia/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl shadow-lg"
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  📸
+                </motion.a>
+                <motion.a
+                  href="https://wa.me/918956022183?text=Hi! I found you on your website and wanted to connect."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                  className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl shadow-lg"
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <MessageCircle size={24} className="text-green-600" />
+                </motion.a>
+                <motion.a
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=support@wonderlearning.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Gmail"
+                  className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl shadow-lg"
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  ✉️
+                </motion.a>
+                <motion.a
+                  href="https://uk.linkedin.com/company/wonder-learning"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-2xl shadow-lg"
+                  whileHover={{ scale: 1.2, rotate: 360 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  💼
+                </motion.a>
               </div>
             </motion.div>
           </motion.div>

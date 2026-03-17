@@ -47,7 +47,7 @@ export default function Navbar() {
               whileTap={{ scale: 0.98 }}
             >
               <Link to="/" className="inline-flex">
-                <img src={logo} alt="Wonder Learning India" className="h-24 w-auto object-contain" />
+                <img src={logo} alt="Wonder Learning India" className="h-16 md:h-24 w-auto object-contain" />
               </Link>
             </motion.div>
 
@@ -139,7 +139,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
             <motion.button
-              className="md:hidden p-2 rounded-lg bg-white/20 text-white"
+              className="md:hidden p-2 rounded-lg bg-white/20 text-black"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               whileTap={{ scale: 0.95 }}
             >

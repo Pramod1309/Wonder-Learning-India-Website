@@ -1,5 +1,11 @@
 import { motion } from 'framer-motion';
 import { Brain, Heart, Users, Sparkles, Book, Zap, CheckCircle, Target, Layers, Star, Award, Lightbulb, Quote} from 'lucide-react';
+import annamayaImage from '../assets/AANAMAYA KOSH.jpg';
+import pranamayaImage from '../assets/PRANMAYA KOSH.jpg';
+import manomayaImage from '../assets/MANOMAYA.jpg';
+import vigyanamayaImage from '../assets/VIGYANMAYA.jpg';
+import anandamayaImage from '../assets/AANAD.jpg';
+import koshQuestImage from '../assets/KoshQuest.jpg';
 
 export default function Curriculum() {
   const panchkosh = [
@@ -18,7 +24,7 @@ export default function Curriculum() {
         'Sensory exploration',
       ],
       benefits: 'Develops physical confidence, coordination, and sensory awareness',
-      image: '/src/assets/AANAMAYA KOSH.jpg',
+      image: annamayaImage,
     },
     {
       name: 'Pranamaya Kosh',
@@ -35,7 +41,7 @@ export default function Curriculum() {
         'Energy regulation games',
       ],
       benefits: 'Enhances vitality and supports regulation of emotions and energy',
-      image: '/src/assets/PRANMAYA KOSH.jpg',
+      image: pranamayaImage,
     },
     {
       name: 'Manomaya Kosh',
@@ -52,7 +58,7 @@ export default function Curriculum() {
         'Friendship and collaboration circles',
       ],
       benefits: 'Builds communication, self-expression, and social-emotional foundations',
-      image: '/src/assets/MANOMAYA.jpg',
+      image: manomayaImage,
     },
     {
       name: 'Vigyanamaya Kosh',
@@ -69,7 +75,7 @@ export default function Curriculum() {
         'Curiosity labs and projects',
       ],
       benefits: 'Develops reasoning, curiosity, and early academic readiness',
-      image: '/src/assets/VIGYANMAYA.jpg',
+      image: vigyanamayaImage,
     },
     {
       name: 'Anandamaya Kosh',
@@ -86,7 +92,7 @@ export default function Curriculum() {
         'Cultural celebrations',
       ],
       benefits: 'Cultivates joy, connectedness, and a love of learning',
-      image: '/src/assets/AANAD.jpg',
+      image: anandamayaImage,
     },
   ];
 
@@ -118,7 +124,7 @@ export default function Curriculum() {
         >
           <div className="flex justify-center mb-8">
             <img 
-              src="/KoshQuest.jpg" 
+              src={koshQuestImage} 
               alt="KoshQuest" 
               className="h-64 w-auto rounded-xl shadow-xl border-4 border-white"
             />
@@ -278,7 +284,7 @@ export default function Curriculum() {
           
           {/* Circular Diagram */}
           <div className="relative max-w-3xl mx-auto">
-            <div className="aspect-square">
+            <div className="hidden md:block aspect-square">
               {/* Center Circle */}
               <motion.div
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-2xl z-10"
@@ -318,6 +324,27 @@ export default function Curriculum() {
                   </motion.div>
                 );
               })}
+            </div>
+            <div className="md:hidden">
+              <div className="mx-auto mb-6 w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex flex-col items-center justify-center shadow-xl text-white">
+                <div className="text-3xl mb-1">ðŸ‘¶</div>
+                <p className="text-xs">Child</p>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {panchkosh.map((kosha, index) => (
+                  <motion.div
+                    key={index}
+                    className={`w-full min-h-[120px] bg-gradient-to-br ${kosha.color} rounded-2xl flex flex-col items-center justify-center shadow-xl text-white p-3`}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <div className="text-2xl mb-2">{kosha.emoji}</div>
+                    <p className="text-xs text-center leading-snug">{kosha.title}</p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
 

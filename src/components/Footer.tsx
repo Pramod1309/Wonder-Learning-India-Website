@@ -55,7 +55,7 @@ export default function Footer() {
               className="flex items-center gap-3 mb-4"
               whileHover={{ scale: 1.05 }}
             >
-              <img src={logo} alt="Wonder Learning India" className="h-20 w-auto object-contain" />
+              <img src={logo} alt="Wonder Learning India" className="h-16 md:h-20 w-auto object-contain" />
             </motion.div>
             <p className="text-white/85 mb-4">
               Inspiring early learning and transforming preschools across India with innovation, care, and excellence.

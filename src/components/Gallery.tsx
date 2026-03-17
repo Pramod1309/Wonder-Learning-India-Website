@@ -298,7 +298,9 @@ export default function Gallery() {
               Join 200+ preschools creating magical learning experiences with Wonder Learning!
             </p>
             <motion.a
-              href="#contact"
+              href="https://wa.me/918956022183?text=Hi! I'm ready to start my journey with Wonder Learning."
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-white text-orange-600 px-10 py-4 rounded-full shadow-xl"
               whileHover={{ scale: 1.1, y: -5 }}
               whileTap={{ scale: 0.95 }}

@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { useNavigate } from 'react-router-dom';
 import { Briefcase, Compass, Shield, Users, TrendingUp, Award, Heart } from 'lucide-react';
 import award1 from '../assets/award1.jpg';
 import award2 from '../assets/award 2.jpg';
@@ -7,6 +8,8 @@ import award4 from '../assets/Award4.jpg';
 import award5 from '../assets/Award5.jpg';
 
 export default function About() {
+  const navigate = useNavigate();
+  
   const timeline = [
     { year: '2017', event: 'Founded Wonder Learning', icon: '🌱' },
     { year: '2019', event: '150+ Preschools Partnered', icon: '🎯' },
@@ -15,12 +18,24 @@ export default function About() {
     { year: '2025', event: '420+ Pan-India Presence', icon: '🌏' },
   ];
 
-  const team = [
-    { name: 'Priya sharma', role: 'Founder & CEO', avatar: '👩‍💼', color: 'from-pink-400 to-red-400' },
-    { name: 'Rajesh Kumar', role: 'Head of Curriculum', avatar: '👨‍🏫', color: 'from-blue-400 to-cyan-400' },
-    { name: 'Anita Patel', role: 'Training Director', avatar: '👩‍🎓', color: 'from-green-400 to-emerald-400' },
-    { name: 'Vikram Singh', role: 'Product Manager', avatar: '👨‍💻', color: 'from-yellow-400 to-orange-400' },
-  ];
+  const handleAwardClick = () => {
+    navigate('/gallery');
+    // Increased delay for mobile devices and added multiple attempts
+    setTimeout(() => {
+      const awardsSection = document.getElementById('awards');
+      if (awardsSection) {
+        awardsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // Fallback: try again after a longer delay
+        setTimeout(() => {
+          const fallbackAwards = document.getElementById('awards');
+          if (fallbackAwards) {
+            fallbackAwards.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 500);
+      }
+    }, 300); // Increased from 100ms to 300ms for mobile
+  };
 
   return (
     <section id="about" className="py-20 bg-gradient-to-b from-yellow-50 via-pink-50 to-blue-50 relative overflow-hidden">
@@ -32,24 +47,109 @@ export default function About() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <motion.div
-            className="inline-block text-6xl mb-4"
-            animate={{ rotate: [0, 10, -10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            🏫
-          </motion.div>
-          <h2 className="inline-block text-4xl md:text-6xl mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent leading-[1.25] pb-2 overflow-visible">
-            About Us
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Wonder Learning India Pvt. Ltd. is a trusted name in early childhood education consulting and preschool development. We specialize in setting up preschools, designing child-centric curriculum, training educators, and providing complete operational and academic support.Our mission is to empower educators and partners to deliver world-class learning experiences that nurture curiosity, creativity, and confidence in every child. With a focus on quality, innovation, and integrity, we’re helping shape the future of early education—one classroom at a time.
-          </p>
+          <div className="text-center mb-8">
+            <motion.div
+              className="inline-block text-6xl mb-4"
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              🏫
+            </motion.div>
+            <h2 className="inline-block text-4xl md:text-6xl mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent leading-[1.25] pb-2 overflow-visible">
+              About Us
+            </h2>
+          </div>
+          
+          {/* Creative Content Layout */}
+          <div className="max-w-5xl mx-auto">
+            <div className="relative">
+              {/* Background decorative element */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-purple-50 via-pink-50 to-blue-50 rounded-3xl opacity-50 blur-xl"></div>
+              
+              {/* Main content card */}
+              <motion.div 
+                className="relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-6 md:p-8 border border-purple-100"
+                style={{ boxShadow: "0 25px 50px -12px rgba(147, 51, 234, 0.25)" }}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Quote mark decoration - properly aligned */}
+                <div className="absolute top-0 left-0 text-5xl text-purple-200 opacity-60 leading-none p-2">"</div>
+                <div className="absolute bottom-0 right-0 text-5xl text-purple-200 opacity-60 leading-none p-2">"</div>
+                
+                {/* Main paragraph with enhanced typography */}
+                <div className="relative z-10 px-4 py-2">
+                  <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6 font-light text-center md:text-left max-w-4xl mx-auto">
+                    <span className="font-semibold text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text">
+                      Wonder Learning India Pvt. Ltd.
+                    </span>{" "}
+                    is a trusted name in early childhood education consulting and preschool development.
+                  </p>
+                  
+                  {/* Creative bullet points for services */}
+                  <div className="mb-6 max-w-4xl mx-auto text-center md:text-left">
+                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light mb-3">
+                      We specialize in:
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-3 md:px-8">
+                      <div className="flex items-start justify-center md:justify-start gap-2">
+                        <span className="text-purple-500 mt-1 flex-shrink-0">▸</span>
+                        <span className="text-lg md:text-xl text-gray-700 font-light">
+                          <span className="font-medium text-purple-600">Setting up preschools</span>
+                        </span>
+                      </div>
+                      <div className="flex items-start justify-center md:justify-start gap-2">
+                        <span className="text-pink-500 mt-1 flex-shrink-0">▸</span>
+                        <span className="text-lg md:text-xl text-gray-700 font-light">
+                          <span className="font-medium text-pink-600">Child-centric curriculum</span>
+                        </span>
+                      </div>
+                      <div className="flex items-start justify-center md:justify-start gap-2">
+                        <span className="text-blue-500 mt-1 flex-shrink-0">▸</span>
+                        <span className="text-lg md:text-xl text-gray-700 font-light">
+                          <span className="font-medium text-blue-600">Educator training</span>
+                        </span>
+                      </div>
+                      <div className="flex items-start justify-center md:justify-start gap-2">
+                        <span className="text-green-500 mt-1 flex-shrink-0">▸</span>
+                        <span className="text-lg md:text-xl text-gray-700 font-light">
+                          <span className="font-medium text-green-600">Complete operational support</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <p className="text-lg md:text-xl text-gray-700 leading-relaxed font-light text-center md:text-left max-w-4xl mx-auto">
+                    Our mission is to{" "}
+                    <span className="font-semibold text-red-500">
+                      empower educators and partners
+                    </span>{" "}
+                    to deliver world-class learning experiences that nurture{" "}
+                    <span className="font-medium">curiosity</span>,{" "}
+                    <span className="font-medium">creativity</span>, and{" "}
+                    <span className="font-medium">confidence</span>{" "}
+                    in every child.
+                  </p>
+                </div>
+                
+                {/* Highlighted mission statement */}
+                <motion.div 
+                  className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl border border-purple-200"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <p className="text-base md:text-lg text-gray-800 text-center font-medium italic">
+                    "With a focus on quality, innovation, and integrity, we're helping shape the future of early education—one classroom at a time."
+                  </p>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Mission, Vision, Values */}
@@ -151,38 +251,38 @@ export default function About() {
                     {/* Year-specific awards */}
                     {item.year === '2019' && (
                       <div className="mt-2">
-                        <a href="#awards" className="block w-12 h-12 mx-auto rounded-lg overflow-hidden border border-gray-200 shadow hover:shadow-md">
+                        <button onClick={handleAwardClick} className="block w-12 h-12 mx-auto rounded-lg overflow-hidden border border-gray-200 shadow hover:shadow-md transition-all duration-300 hover:scale-110 cursor-pointer">
                           <img src={award1} alt="2019 Award" className="w-full h-full object-cover" />
-                        </a>
+                        </button>
                         <p className="text-xs mt-1 text-gray-600">Best Emerging Preschool Consultant</p>
                       </div>
                     )}
                     {item.year === '2021' && (
                       <div className="mt-2">
                         <div className="flex justify-center gap-2">
-                          <a href="#awards" className="block w-12 h-12 rounded-lg overflow-hidden border border-gray-200 shadow hover:shadow-md">
+                          <button onClick={handleAwardClick} className="block w-12 h-12 rounded-lg overflow-hidden border border-gray-200 shadow hover:shadow-md transition-all duration-300 hover:scale-110 cursor-pointer">
                             <img src={award5} alt="2021 Award A" className="w-full h-full object-cover" />
-                          </a>
-                          <a href="#awards" className="block w-12 h-12 rounded-lg overflow-hidden border border-gray-200 shadow hover:shadow-md">
+                          </button>
+                          <button onClick={handleAwardClick} className="block w-12 h-12 rounded-lg overflow-hidden border border-gray-200 shadow hover:shadow-md transition-all duration-300 hover:scale-110 cursor-pointer">
                             <img src={award3} alt="2021 Award B" className="w-full h-full object-cover" />
-                          </a>
+                          </button>
                         </div>
                         <p className="text-xs mt-1 text-gray-600">India's Top 100 Brands</p>
                       </div>
                     )}
                     {item.year === '2023' && (
                       <div className="mt-2">
-                        <a href="#awards" className="block w-12 h-12 mx-auto rounded-lg overflow-hidden border border-gray-200 shadow hover:shadow-md">
+                        <button onClick={handleAwardClick} className="block w-12 h-12 mx-auto rounded-lg overflow-hidden border border-gray-200 shadow hover:shadow-md transition-all duration-300 hover:scale-110 cursor-pointer">
                           <img src={award4} alt="2023 Award" className="w-full h-full object-cover" />
-                        </a>
+                        </button>
                         <p className="text-xs mt-1 text-gray-600">Most Promising Preschool Consultant</p>
                       </div>
                     )}
                     {item.year === '2025' && (
                       <div className="mt-2">
-                        <a href="#awards" className="block w-12 h-12 mx-auto rounded-lg overflow-hidden border border-gray-200 shadow hover:shadow-md">
+                        <button onClick={handleAwardClick} className="block w-12 h-12 mx-auto rounded-lg overflow-hidden border border-gray-200 shadow hover:shadow-md transition-all duration-300 hover:scale-110 cursor-pointer">
                           <img src={award2} alt="2025 Award" className="w-full h-full object-cover" />
-                        </a>
+                        </button>
                         <p className="text-xs mt-1 text-gray-600">Best Publication of the Year</p>
                       </div>
                     )}
@@ -199,26 +299,7 @@ export default function About() {
             </div>
           </div>
           
-          {/* Mobile version (stacked) */}
-          <div className="md:hidden mt-8">
-            <div className="relative">
-              <div className="absolute left-5 top-0 bottom-0 w-1 bg-gradient-to-b from-red-300 via-yellow-300 to-blue-300"></div>
-              {timeline.map((item, index) => (
-                <div key={index} className="relative pl-12 pb-8">
-                  <div className="absolute left-0 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full top-1"></div>
-                  <div className="bg-white p-4 rounded-lg shadow-md">
-                    <div className="flex items-center gap-2">
-                      <span className="text-2xl">{item.icon}</span>
-                      <h4 className="text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                        {item.year}
-                      </h4>
-                    </div>
-                    <p className="text-sm text-gray-700 mt-1">{item.event}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          
         </motion.div>
 
         
@@ -234,7 +315,7 @@ export default function About() {
             { icon: <Users size={40} />, number: '400+', label: 'Partner Preschools', emoji: '🏫' },
             { icon: <Award size={40} />, number: '10+', label: 'Awards Won', emoji: '🏆' },
             { icon: <TrendingUp size={40} />, number: '95%', label: 'Success Rate', emoji: '📈' },
-            { icon: <Heart size={40} />, number: '10k+', label: 'Happy Children', emoji: '😊' },
+            { icon: <Heart size={40} />, number: '1.5 L+', label: 'Happy Kids', emoji: '😊' },
           ].map((stat, index) => (
             <motion.div
               key={index}

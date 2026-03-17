@@ -149,13 +149,16 @@ export default function Services() {
                 </ul>
 
                 {/* Button */}
-                <motion.button
-                  className={`w-full bg-gradient-to-r ${service.color} text-white py-3 rounded-xl shadow-lg`}
+                <motion.a
+                  href="https://wa.me/918956022183?text=Hi! I'm interested in learning more about your services."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`block w-full bg-gradient-to-r ${service.color} text-white py-3 rounded-xl shadow-lg text-center`}
                   whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   Learn More →
-                </motion.button>
+                </motion.a>
               </div>
 
               {/* Decorative Corner */}
@@ -208,7 +211,9 @@ export default function Services() {
               Expert guidance, proven systems, and a child-centric curriculum — backed by regular audits, quality reviews, and operational assistance.
             </p>
             <motion.a
-              href="#contact"
+              href="https://wa.me/918956022183?text=Hi! I'm interested in partnering with Wonder Learning."
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block bg-white text-orange-600 px-10 py-4 rounded-full shadow-xl"
               whileHover={{ scale: 1.1, y: -5 }}
               whileTap={{ scale: 0.95 }}

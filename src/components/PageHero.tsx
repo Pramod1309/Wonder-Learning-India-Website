@@ -8,7 +8,9 @@ interface PageHeroProps {
 }
 
 export default function PageHero({ title, subtitle, kicker, imageSrc, imageAlt, size = 'compact' }: PageHeroProps) {
-  const heightClass = size === 'tall' ? 'h-[70vh] min-h-[500px]' : 'h-[40vh] min-h-[320px]';
+  const heightClass = size === 'tall'
+    ? 'h-[58vh] min-h-[420px] md:h-[70vh] md:min-h-[500px]'
+    : 'h-[32vh] min-h-[240px] md:h-[40vh] md:min-h-[320px]';
 
   return (
     <section className="relative w-full">

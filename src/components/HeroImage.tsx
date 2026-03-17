@@ -15,7 +15,7 @@ export default function HeroImage() {
   }, []);
 
   return (
-    <div className="relative w-full h-[70vh] min-h-[500px] overflow-hidden z-50 bg-black">
+    <div className="relative w-full h-[60vh] min-h-[420px] md:h-[70vh] md:min-h-[500px] overflow-hidden z-10 bg-black">
       <img
         src={images[currentIndex]}
         alt="Hero slideshow"
