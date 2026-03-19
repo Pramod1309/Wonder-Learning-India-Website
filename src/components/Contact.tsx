@@ -3,6 +3,8 @@ import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Contact() {
+  const googleSheetEndpoint =
+    'https://script.google.com/macros/s/AKfycbzIH3LU-tYHiGcBIJmYzIY-3e1vAHCr_9P0e5mmjB856g7e9xKGYBG-_IDSWKQDBHfukA/exec';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -17,13 +19,20 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:4000/api/contact', {
+      const payload = {
+        Name: formData.name,
+        Email: formData.email,
+        School_Name: formData.schoolName,
+        Message: formData.message,
+      };
+      const body = new URLSearchParams(payload);
+      const res = await fetch(googleSheetEndpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body,
       });
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data?.ok === false) {
         alert(data?.error || 'Failed to submit. Please try again.');
         return;
       }
@@ -167,7 +176,7 @@ export default function Contact() {
                   icon: <Phone className="text-white" size={28} />,
                   emoji: '📱',
                   title: 'Phone',
-                  info: '+91 8956022183',
+                  info: '+91 9766468566',
                   color: 'from-green-400 to-emerald-500',
                 },
                 {
@@ -283,7 +292,7 @@ export default function Contact() {
                   📸
                 </motion.a>
                 <motion.a
-                  href="https://wa.me/918956022183?text=Hi! I found you on your website and wanted to connect."
+                  href="https://wa.me/919766468566?text=Hi! I found you on your website and wanted to connect."
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"

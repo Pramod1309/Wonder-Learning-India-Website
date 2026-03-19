@@ -104,7 +104,7 @@ const ChatAssistant = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 p-4 overflow-y-auto overflow-x-hidden bg-gray-50" style={{ height: 'calc(100% - 150px)' }}>
+          <div className="flex-1 min-h-0 p-4 overflow-y-auto overflow-x-hidden bg-gray-50">
             <div className="space-y-4">
               {messages.map((msg, i) => (
                 <div 
@@ -116,7 +116,7 @@ const ChatAssistant = () => {
                       msg.sender === 'user' 
                         ? 'bg-blue-500 text-white rounded-br-none' 
                         : 'bg-white border border-gray-200 rounded-bl-none'
-                    }`}
+                    } break-words`}
                   >
                     {msg.text}
                   </div>
@@ -127,8 +127,8 @@ const ChatAssistant = () => {
           </div>
 
           {/* Predefined Prompts */}
-          <div className="p-3 bg-gray-100 border-t border-gray-200">
-            <div className="flex flex-wrap gap-2 mb-3">
+          <div className="shrink-0 p-3 bg-gray-100 border-t border-gray-200">
+            <div className="max-h-[140px] overflow-y-auto flex flex-wrap gap-2 mb-3 pr-1">
               {predefinedPrompts.map((prompt, i) => (
                 <button
                   key={i}

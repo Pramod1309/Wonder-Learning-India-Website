@@ -7,20 +7,34 @@ export default function HeroImage() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const timer = window.setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
+    }, 3000);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [images.length]);
 
   return (
     <div className="relative w-full h-[60vh] min-h-[420px] md:h-[70vh] md:min-h-[500px] overflow-hidden z-10 bg-black">
-      <img
-        src={images[currentIndex]}
-        alt="Hero slideshow"
-        className="w-full h-full object-cover object-center"
-      />
+      <div
+        className="flex h-full"
+        style={{
+          transform: `translateX(-${currentIndex * 100}%)`,
+          transition: "transform 2500ms cubic-bezier(0.22, 0.61, 0.36, 1)",
+          willChange: "transform",
+        }}
+      >
+        {images.map((image, index) => (
+          <img
+            key={index}
+            src={image}
+            alt={`Hero slide ${index + 1}`}
+            className="w-full h-full object-cover object-center flex-shrink-0"
+          />
+        ))}
+      </div>
     </div>
   );
 }

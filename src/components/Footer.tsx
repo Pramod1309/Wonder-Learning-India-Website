@@ -6,6 +6,8 @@ import skyBg from '../assets/Sky2.avif';
 import Modal from './ui/Modal';
 
 export default function Footer() {
+  const googleSheetEndpoint =
+    'https://script.google.com/macros/s/AKfycbzIH3LU-tYHiGcBIJmYzIY-3e1vAHCr_9P0e5mmjB856g7e9xKGYBG-_IDSWKQDBHfukA/exec';
   const [modal, setModal] = useState<null | 'privacy' | 'terms' | 'refund' | 'sitemap'>(null);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const footerLinks = {
@@ -69,8 +71,8 @@ export default function Footer() {
               <a href="https://mail.google.com/mail/?view=cm&fs=1&to=support@wonderlearning.in" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-90">
                 <Mail size={16} /> support@wonderlearning.in
               </a>
-              <a href="https://wa.me/918956022183" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-90">
-                <Phone size={16} /> +91 8956022183 (WhatsApp)
+              <a href="https://wa.me/919766468566" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-90">
+                <Phone size={16} /> +91 9766468566 (WhatsApp)
               </a>
               <a href="https://www.google.com/maps/search/?api=1&query=Flat%20No.%205%2C%20Guruprasad%20Apartment%2C%20Sun%20City%20Rd%2C%20Anand%20Nagar%2C%20Pune%2C%20Maharashtra%20411051" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-white/85 hover:text-white">
                 📍 Flat No. 5, Guruprasad Apartment, Sun City Rd, Anand Nagar, Pune, Maharashtra 411051
@@ -150,17 +152,24 @@ export default function Footer() {
                     return;
                   }
                   try {
-                    const res = await fetch('http://localhost:4000/api/subscribe', {
+                    const payload = {
+                      Name: '',
+                      Email: newsletterEmail,
+                      School_Name: '',
+                      Message: 'Newsletter Signup',
+                    };
+                    const body = new URLSearchParams(payload);
+                    const res = await fetch(googleSheetEndpoint, {
                       method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({ email: newsletterEmail }),
+                      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+                      body,
                     });
-                    if (!res.ok) {
-                      const data = await res.json().catch(() => ({}));
+                    const data = await res.json().catch(() => ({}));
+                    if (!res.ok || data?.ok === false) {
                       alert(data?.error || 'Subscription failed. Please try again.');
                       return;
                     }
-                    alert('Subscribed successfully! 🎉');
+                    alert('Subscribed successfully! ????');
                     setNewsletterEmail('');
                   } catch (_e) {
                     alert('Network error. Please try again.');

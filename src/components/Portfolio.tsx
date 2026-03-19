@@ -1,6 +1,14 @@
 import { motion } from 'motion/react';
+import { useState } from 'react';
 import { ExternalLink, TrendingUp } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
+import classFun from '../assets/ClassFun.png';
+import ArtClass from '../assets/ArtClass.png';
+import Achievement from '../assets/Achievement.png';
+import PreschoolSetup from '../assets/PreschoolSetup.png';
+import Playground from '../assets/Playground.png';
+import ArtClassActivity from '../assets/ArtClassActivity.png';
+import SportsDay from '../assets/SportsDay.png';
 
 interface CaseStudy {
   name: string;
@@ -11,6 +19,13 @@ interface CaseStudy {
     rating: string;
   };
   emoji: string;
+  feedback: {
+    headline: string;
+    quote: string;
+    person: string;
+    role: string;
+    highlights: string[];
+  };
   // Support both image properties, but make at least one required
   image?: string;
   before?: string;
@@ -18,29 +33,52 @@ interface CaseStudy {
 }
 
 export default function Portfolio() {
+  const [activeStudy, setActiveStudy] = useState<CaseStudy | null>(null);
   const caseStudies = [
     {
-      name: 'Sunshine Preschool, Mumbai',
-      before: 'https://images.unsplash.com/photo-1554721299-e0b8aa7666ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVzY2hvb2wlMjBjaGlsZHJlbiUyMGNsYXNzcm9vbXxlbnwxfHx8fDE3NjIyMDQ1NDh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      after: 'https://images.unsplash.com/photo-1621403215688-d4d8088ccbc4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGNoaWxkcmVuJTIwa2luZGVyZ2FydGVufGVufDF8fHx8MTc2MjIzNDU4Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      name: 'Global SmartKidz Preschool, Hadapsar',
+      image: classFun,
       description: 'Transformed a struggling preschool into a thriving learning center with 150+ enrollments.',
       stats: { enrollment: '+200%', revenue: '+180%', rating: '4.9/5' },
       emoji: '☀️',
+      feedback: {
+        headline: 'Enrollment surged within one academic year',
+        quote:
+          'Wonder Learning helped us rebuild parent trust and create a joyful classroom experience. Our inquiries doubled and admissions followed quickly.',
+        person: '',
+        role: '',
+        highlights: ['Stronger parent engagement', 'Play-based learning revamp', 'Staff training & mentoring'],
+      },
     },
     {
-      name: 'Little Stars Academy, Delhi',
-      image: '/Client image1 (2).png',
+      name: 'Devaki English High School, Kalyan',
+      image: ArtClass,
       description: 'Complete rebranding and curriculum overhaul leading to award-winning status.',
       stats: { enrollment: '+150%', revenue: '+165%', rating: '5.0/5' },
       emoji: '⭐',
+      feedback: {
+        headline: 'Rebranding that parents immediately trusted',
+        quote:
+          'From signage to classroom flow, every detail was upgraded. The impact was immediate?open house attendance and admissions both jumped.',
+        person: '',
+        role: '',
+        highlights: ['Brand refresh & marketing kit', 'Classroom redesign', 'Parent communication playbook'],
+      },
     },
     {
-      name: 'Rainbow Kids, Bangalore',
-      before: 'https://images.unsplash.com/photo-1638897481243-42fa0664785f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxraWRzJTIwcGxheWluZyUyMHRveXN8ZW58MXx8fHwxNzYyMjM4NDE5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      after: 'https://images.unsplash.com/photo-1686942485101-2f975378395f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxraWRzJTIwb3V0ZG9vciUyMHBsYXl8ZW58MXx8fHwxNzYyMTM4NjUwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      description: 'Startup preschool setup from scratch with modern facilities and curriculum.',
+      name: 'Pride Preschool, Pune',
+      image: Achievement,
+      description: 'Complete rebranding and curriculum overhaul leading to award-winning status.',
       stats: { enrollment: '120+', revenue: '₹50L+', rating: '4.8/5' },
       emoji: '🌈',
+      feedback: {
+        headline: 'A joyful launch with measurable outcomes',
+        quote:
+          'We launched on time with a clear learning roadmap. Parents loved the transparency, and our reviews went from average to excellent.',
+        person: '',
+        role: '',
+        highlights: ['Launch roadmap', 'Teacher onboarding', 'Monthly progress updates'],
+      },
     },
   ];
 
@@ -110,7 +148,7 @@ export default function Portfolio() {
                     whileHover={{ scale: 1.02 }}
                   >
                     <ImageWithFallback
-                      src={study.name === 'Little Stars Academy, Delhi' ? study.image || '' : study.after || ''}
+                      src={study.image || ''}
                       alt={study.name}
                       className="w-full h-full object-cover"
                       width={800}
@@ -178,6 +216,7 @@ export default function Portfolio() {
                     className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-3 rounded-xl shadow-lg flex items-center gap-2 justify-center"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => setActiveStudy(study)}
                   >
                     Read Full Case Study
                     <ExternalLink size={18} />
@@ -201,19 +240,19 @@ export default function Portfolio() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               {
-                src: 'https://images.unsplash.com/photo-1554721299-e0b8aa7666ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVzY2hvb2wlMjBjaGlsZHJlbiUyMGNsYXNzcm9vbXxlbnwxfHx8fDE3NjIyMDQ1NDh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+                src: PreschoolSetup,
                 isClient: false
               },
               {
-                src: 'https://images.unsplash.com/photo-1621403215688-d4d8088ccbc4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGNoaWxkcmVuJTIwa2luZGVyZ2FydGVufGVufDF8fHx8MTc2MjIzNDU4Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+                src: Playground,
                 isClient: false
               },
               {
-                src: 'https://images.unsplash.com/photo-1629652486845-eb09110a62b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMGNoaWxkcmVuJTIwbGVhcm5pbmd8ZW58MXx8fHwxNzYyMjM4NDE5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+                src: ArtClassActivity,
                 isClient: false
               },
               {
-                src: '/Client image1 (2).png',
+                src: SportsDay,
                 isClient: true
               }
             ].map(({ src, isClient }, i) => {
@@ -278,6 +317,72 @@ export default function Portfolio() {
           </div>
         </motion.div>
       </div>
+
+      {/* Case Study Modal */}
+      {activeStudy && (
+        <div
+          className="fixed inset-0 z-[2000] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setActiveStudy(null)}
+        >
+          <div
+            className="w-full max-w-2xl bg-white rounded-3xl shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="text-white p-6" style={{ backgroundColor: '#c2185b' }}>
+              <div className="flex items-center justify-between">
+                <div className="text-4xl">{activeStudy.emoji}</div>
+                <button
+                  className="text-white/90 hover:text-white text-sm"
+                  onClick={() => setActiveStudy(null)}
+                >
+                  Close
+                </button>
+              </div>
+              <h4 className="text-2xl mt-3 font-semibold">{activeStudy.name}</h4>
+              <p className="text-white/90 mt-1">{activeStudy.feedback.headline}</p>
+            </div>
+
+            <div className="p-6 space-y-6">
+              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5">
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  “{activeStudy.feedback.quote}”
+                </p>
+                <div className="mt-4 text-sm text-gray-500">
+                  — {activeStudy.feedback.person}, {activeStudy.feedback.role}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {activeStudy.feedback.highlights.map((item) => (
+                  <span
+                    key={item}
+                    className="px-3 py-1.5 rounded-full text-xs bg-blue-50 text-blue-700 border border-blue-100"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-3 gap-3">
+                <div className="rounded-xl bg-gradient-to-br from-blue-50 to-blue-100 p-4 text-center">
+                  <div className="text-xl text-blue-700">{activeStudy.stats.enrollment}</div>
+                  <div className="text-xs text-blue-600">Enrollment</div>
+                </div>
+                <div className="rounded-xl bg-gradient-to-br from-green-50 to-green-100 p-4 text-center">
+                  <div className="text-xl text-green-700">{activeStudy.stats.revenue}</div>
+                  <div className="text-xs text-green-600">Revenue</div>
+                </div>
+                <div className="rounded-xl bg-gradient-to-br from-yellow-50 to-yellow-100 p-4 text-center">
+                  <div className="text-xl text-yellow-700">{activeStudy.stats.rating}</div>
+                  <div className="text-xs text-yellow-600">Rating</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

@@ -12,6 +12,15 @@ import seminar2 from '../assets/seminar2.jpg';
 import seminar3 from '../assets/seminar3.jpg';
 import seminar4 from '../assets/seminar4.jpg';
 import seminarVideo from '../assets/Seminar video.mp4';
+import classFun from '../assets/ClassFun.png';
+import Portfolio from '../assets/Portfolio.png';
+import LearningTime from '../assets/LearningTime.png';
+import BestFriend from '../assets/BestFriend.png';
+import StoryTime from '../assets/StoryTime.png';
+import ArtClass from '../assets/ArtClass.png';
+import Art from '../assets/Art.png';
+import PlayTime from '../assets/PlayTime.jpg';
+import Achievement from '../assets/Achievement.png';
 
 export default function Gallery() {
   const containerRef = useRef(null);
@@ -35,47 +44,48 @@ export default function Gallery() {
 
   const galleryImages = [
     {
-      url: 'https://images.unsplash.com/photo-1554721299-e0b8aa7666ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVzY2hvb2wlMjBjaGlsZHJlbiUyMGNsYXNzcm9vbXxlbnwxfHx8fDE3NjIyMDQ1NDh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      url: classFun,
       title: 'Classroom Fun',
       emoji: '📚',
     },
     {
-      url: 'https://images.unsplash.com/photo-1621403215688-d4d8088ccbc4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGNoaWxkcmVuJTIwa2luZGVyZ2FydGVufGVufDF8fHx8MTc2MjIzNDU4Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      url: Portfolio,
       title: 'Happy Smiles',
       emoji: '😊',
+      frameClassName: 'h-[240px]',
     },
     {
-      url: 'https://images.unsplash.com/photo-1629652486845-eb09110a62b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMGNoaWxkcmVuJTIwbGVhcm5pbmd8ZW58MXx8fHwxNzYyMjM4NDE5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      url: LearningTime,
       title: 'Learning Time',
       emoji: '🎨',
     },
     {
-      url: 'https://images.unsplash.com/photo-1547496614-d145e2fa88ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMHNtaWxpbmclMjBzY2hvb2x8ZW58MXx8fHwxNzYyMjM4NDIxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      url: BestFriend,
       title: 'Best Friends',
       emoji: '👫',
     },
     {
-      url: 'https://images.unsplash.com/photo-1638897481243-42fa0664785f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxraWRzJTIwcGxheWluZyUyMHRveXN8ZW58MXx8fHwxNzYyMjM4NDE5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      url: PlayTime,
       title: 'Playtime',
       emoji: '🎮',
     },
     {
-      url: 'https://images.unsplash.com/photo-1551126665-eee219019a41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxraWRzJTIwYXJ0JTIwcGFpbnRpbmd8ZW58MXx8fHwxNzYyMTQxODY5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      url: ArtClass,
       title: 'Art Class',
       emoji: '🖌️',
     },
     {
-      url: 'https://images.unsplash.com/photo-1592106680408-e7e63efbc7ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGlsZHJlbiUyMHJlYWRpbmclMjBib29rc3xlbnwxfHx8fDE3NjIxODY3NDZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      url: StoryTime,
       title: 'Story Time',
       emoji: '📖',
     },
     {
-      url: 'https://images.unsplash.com/photo-1686942485101-2f975378395f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxraWRzJTIwb3V0ZG9vciUyMHBsYXl8ZW58MXx8fHwxNzYyMTM4NjUwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
-      title: 'Outdoor Fun',
+      url: Achievement,
+      title: 'Achievement',
       emoji: '🌳',
     },
     {
-      url: 'https://images.unsplash.com/photo-1738051889746-ae7414e5ebb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlZHVjYXRpb25hbCUyMHRveXMlMjBwcmVzY2hvb2x8ZW58MXx8fHwxNzYyMjM4NDIwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+      url: Art,
       title: 'Building Dreams',
       emoji: '🧱',
     },
@@ -298,7 +308,7 @@ export default function Gallery() {
               Join 200+ preschools creating magical learning experiences with Wonder Learning!
             </p>
             <motion.a
-              href="https://wa.me/918956022183?text=Hi! I'm ready to start my journey with Wonder Learning."
+              href="https://wa.me/919766468566?text=Hi! I'm ready to start my journey with Wonder Learning."
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-white text-orange-600 px-10 py-4 rounded-full shadow-xl"
@@ -325,11 +335,17 @@ function GalleryCard({ image, index }: { image: any; index: number }) {
       whileHover={{ scale: 1.05, rotate: Math.random() > 0.5 ? 2 : -2 }}
     >
       {/* Image */}
-      <div className="relative overflow-hidden">
+      <div className={['relative overflow-hidden', image.frameClassName].filter(Boolean).join(' ')}>
         <ImageWithFallback
           src={image.url}
           alt={image.title}
-          className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-500"
+          className={[
+            'w-full object-cover group-hover:scale-110 transition-transform duration-500',
+            image.frameClassName ? 'h-full' : 'h-auto',
+            image.imageClassName,
+          ]
+            .filter(Boolean)
+            .join(' ')}
         />
         
         {/* Gradient Overlay */}
